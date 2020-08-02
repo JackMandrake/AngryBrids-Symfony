@@ -1,3 +1,8 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+# Je crée une route qui s'appel "homepage"
+#homepage:
+    # on precise l'URL de cette route
+    #path: /
+    # on precise le contrlleur qui doit etre executé pour repondre à cette URL
+    # App\Controller\DefaultController c'est la classe de controlleur a instancier
+    # ::homepage c'est la methode de ce controleur à executer
+    #controller: App\Controller\DefaultController::homepage
