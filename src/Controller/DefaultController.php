@@ -18,7 +18,9 @@ class DefaultController extends AbstractController {
     /**
      * L'annotation Route permet de dire a symfony qu'une nouvelle route existe et qu'il faudra appeler la methode située juste en dessous
      * 
-     * @Route("/")
+     * le name de l'annotation Route permet de "retrouver" facilement notre route (tres utile quand on voudra générer une URL vers cette route pour créer un lien HTML)
+     * methode permet de limiter l'accès à cette route avec la methode GET dans cet exemple 
+     * @Route("/", name="homepage", methods={"GET"})
      */
     public function homepage(): Response
     {
@@ -31,4 +33,22 @@ class DefaultController extends AbstractController {
             "homepage.html.twig"
         );
     }
+
+    /**
+     * {id} est la partie variable de ma route on pourra acceder a cette methode de controleur avec les url /bird/2 et /bird/6, etc ...
+     * 
+     * requirements permet de s'assurer que notre variable d'URL repond à la contrainte regex "\d+"
+     * avec ca on est sur que id contiendra un nombre
+     * 
+     * @Route("/bird/{id}", name="bird_show", methods={"GET"}, requirements={"id"="\d+"})
+     */
+    public function showBird(int $id)
+    {
+        dump($id);
+        return $this->render(
+            "show_bird.html.twig"
+        );
+    }
+
+
 }
