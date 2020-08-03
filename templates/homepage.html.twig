@@ -2,5 +2,30 @@
 
 {% block body %}
     <h1>Bienvenue sur le Fansite de Angry Birds</h1>
+
+    {# on affiche le dernier oiseau consulté uniquement si dans le controlleur on a reussi a recupérer un id d'oiseau dans la session #}
+    {% if lastSeenBirdId is not empty %}
+        <p>Dernier oiseau consulté : {{ birds[lastSeenBirdId].name }}</p>
+    {% endif %}
+
+
+    <a href="{{ path('calendar_download') }}">Télécharger le calendrier</a>
+
+    <div class="row">
+        {% for birdId, bird in birds %}
+            <div class="col-sm-4">
+                {# pour créer un lien vers dees fichier qui se situe dans le dossier public on utilise la fonction twig asset() #}
+                {# https://symfony.com/doc/current/templates.html#linking-to-css-javascript-and-image-assets #}
+                {# le caractere ~ permet de concatener plusieur chaines en twig #}
+                <img src="{{ asset("assets/images/" ~ bird.image) }}">
+
+                {# je genere une URL vers une route de mon application grace a la fonction twig path() #}
+                {# je fourni au generateur d'url la valeur qui va remplacer la partie variable de l'URL de notre route (l'id de l'oiseau) #}
+                <a href="{{ path('bird_show', {id: birdId}) }}">{{ bird.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+
+
 {% endblock %}
 

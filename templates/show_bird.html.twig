@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Détail d'un oiseau</h1>
+
+    <a href="{{ path('homepage') }}">Retour à l'accueil</a>
+
+    {# on accede au tabelau qui contient lees details de l'oiseau #}
+    {# avec twig on accede aux elements d'un tableau de la meme maniere qu'on accede au propriétés d'un objet : avec le "." #}
+    <h1>{{ bird.name }}</h1>
+    <p>{{ bird.description }}</p>
+    <img src="{{ asset("assets/images/" ~ bird.image) }}">
 {% endblock %}
 
